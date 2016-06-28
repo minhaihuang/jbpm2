@@ -1,0 +1,106 @@
+package test3;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class TestTree
+{
+	/*
+	 * 设S={A,B,C,D,E,F},W={2,3,5,7,9,12}
+	 */
+	static HashMap map;
+	public TestTree()
+		{
+			// TODO Auto-generated constructor stub
+		}
+
+	public static void main(String[] args)
+		{
+			Character[] character = { 'A', 'B', 'C', 'D', 'E', 'F' };
+			int[] weight = { 2, 3, 5, 7, 9, 12 };// 有序或者无序都一样
+			map=new HashMap();
+			List<TreeNode<Integer>> nodes=new ArrayList<TreeNode<Integer>>();
+			for (int i = 0; i < weight.length; i++)
+				{
+					nodes.add(new TreeNode(weight[i]));
+				}
+			while (true)
+				{
+					if (nodes.size() <= 1)
+						break;
+					// 找两个最小的
+					TreeNode minNode = nodes.get(0);
+					TreeNode sminNode = nodes.get(1);
+					for (int i = 1; i < nodes.size(); i++)
+						{
+							
+							TreeNode tempNode = nodes.get(i);
+							
+							int a=(Integer) minNode.getData();
+							int b=(Integer) sminNode.getData();
+							int t=(Integer)tempNode.getData();
+							
+							if (a>=b)
+								{
+									sminNode = minNode;
+									minNode = tempNode;
+								}
+						}
+					nodes.remove(minNode);
+					nodes.remove(sminNode);
+					TreeNode newNode = new TreeNode(
+							(Integer) minNode.getData() + (Integer) sminNode.getData());
+					newNode.leftNode = minNode;
+					newNode.rightNode = sminNode;
+					nodes.add(newNode);
+				}
+			TreeNode hafmanTreeNode=nodes.get(0);
+			getHalmanCode(hafmanTreeNode," ");
+			
+		}
+	 public static void getHalmanCode(TreeNode hafmanTreeNode,String blank)
+	 {
+		 if(hafmanTreeNode==null)
+			 return;
+		 if(hafmanTreeNode.leftNode==null&&hafmanTreeNode.rightNode==null)
+			 {
+			   System.out.println("->"+getCharacter(hafmanTreeNode.data));
+			 }
+		 else 
+			 {
+				 System.out.print("0");
+				 getHalmanCode(hafmanTreeNode.leftNode,blank+" ");
+				 System.out.print(blank+"1");
+				 getHalmanCode(hafmanTreeNode.rightNode,blank+" ");
+			 }
+	 }
+	 //得到某一个字符的编码
+	 public static void getHalmanCode(TreeNode hafmanTreeNode,Character character)
+	 {
+		 if(hafmanTreeNode==null)
+			 return;
+		 if(hafmanTreeNode.leftNode==null&&hafmanTreeNode.rightNode==null)
+			 {
+				 if (getCharacter(hafmanTreeNode.data)==character)
+					{
+						System.out.print("");
+					}
+			 }
+	 }
+            //得到权值对应的字符
+	 public static Character getCharacter(int weight)
+	 {
+		 Set set=map.entrySet();
+		 for(Iterator> iterator=set.iterator();iterator.hasNext();)
+			 {
+				 Map.Entryentry=iterator.next();
+				 if(entry.getValue()==weight)
+					 {
+						 map.remove(entry.getKey());
+						 return entry.getKey();
+					 }
+			 }
+		 return null;
+	 }
+}

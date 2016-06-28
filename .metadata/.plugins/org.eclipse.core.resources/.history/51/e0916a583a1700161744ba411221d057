@@ -1,0 +1,11 @@
+package test3;
+
+public class TreeNode {
+	public TreeNode leftNode;
+	public TreeNode rightNode;
+	public T data;
+
+	public TreeNode(T data) {
+		this.data = data;
+	}
+}

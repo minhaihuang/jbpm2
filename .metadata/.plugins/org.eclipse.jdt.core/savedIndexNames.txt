@@ -1,0 +1,16 @@
+INDEX VERSION 1.126+G:\workspace\jbpm2\.metadata\.plugins\org.eclipse.jdt.core
+3308801653.index
+2340181479.index
+3271193799.index
+1299285309.index
+2864324879.index
+3713975655.index
+1662154014.index
+3896019236.index
+3690573917.index
+939548141.index
+1781879557.index
+4005482050.index
+1418339230.index
+3777632839.index
+3025950412.index
